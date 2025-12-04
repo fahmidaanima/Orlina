@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="this is an ecommerce project for making Orlina ">
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+  <title>Orlina</title>
+
+  <!-- ✅ Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ✅ Firebase config file -->
+  <script type="module" src="javascript/firebaseauth.js"></script>
+</head>
+<body>
+
+  <!-- 🔹 Top Navbar -->
+  <header class="navbar">
+    <!-- Logo -->
+    <div class="logo">
+      <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+    </div>
+
+    <!-- Middle Links (Dropdown) -->
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html" class="nav-link">Home</a>
+
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropbtn">Features <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="features.html">All Features</a>
+          <a href="offers.html">Offers</a>
+          <a href="new-arrivals.html">New Arrivals</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <a href="products.html" class="nav-link dropbtn">Products <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="products.html?cat=perfume">Perfumes</a>
+          <a href="products.html?cat=jewelry">Jewelry</a>
+          <a href="products.html?cat=accessories">Accessories</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="category.html?c=men">Men</a>
+          <a href="category.html?c=women">Women</a>
+          <a href="category.html?c=gift">Gift Items</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropbtn">Review <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="reviews.html">Customer Reviews</a>
+          <a href="testimonials.html">Testimonials</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Right Side -->
+    <div class="nav-actions">
+      <ul class="icons" aria-label="Quick actions">
+        <li class="nav_list icon-item">
+          <a href="cart.html" class="nav_icons" aria-label="Cart">
+            <i class="fa fa-shopping-cart" id="cart_icon"></i>
+          </a>
+        </li>
+        <li class="nav_list icon-item">
+          <a href="profile.html" class="nav_icons" aria-label="Profile">
+            <i class="fa fa-user" id="login_icon"></i>
+          </a>
+        </li>
+      </ul>
+
+      <div class="register_btn">
+        <a href="login.html"><button id="loginBtn" class="login-btn">Login / Sign Up</button></a>
+      </div>
+    </div>
+
+    <!-- ✅ User state check -->
+    <script type="module">
+      import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+      import { auth as mainAuth } from "./javascript/firebaseauth.js";
+
+      const loginBtn = document.getElementById("loginBtn");
+
+      onAuthStateChanged(mainAuth, (user) => {
+        if (user) {
+          if (loginBtn) loginBtn.style.display = "none";
+        } else {
+          if (loginBtn) loginBtn.style.display = "inline-block";
+        }
+      });
+    </script>
+  </header>
+
+  <!-- 🔹 Search Box -->
+  <div class="search-container">
+    <input type="text" placeholder="Search products..." class="search-input" />
+    <button class="search-btn"><i class="fa fa-search"></i></button>
+  </div>
+
+  <!-- 🔹 Banner Section -->
+  <div class="banner-section">
+    <div class="banner-content">
+      <h2>Big Sale is Live!</h2>
+      <p>Up to 50% off on selected products. Shop now!</p>
+      <a href="products.html" class="banner-btn">Explore Deals</a>
+    </div>
+  </div>
+
+  <!-- 🔹 Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h2>Orlina</h2>
+        <p>Quality products, unbeatable prices.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Orlina. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="./javascript/index.js"></script>
+</body>
+</html>

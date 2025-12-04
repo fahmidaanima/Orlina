@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Profile</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <a href="index.html"><img src="images/logo.png" alt="Logo" /></a>
+    </div>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html" class="nav-link">Home</a>
+
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropbtn">Features <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="features.html">All Features</a>
+          <a href="offers.html">Offers</a>
+          <a href="new-arrivals.html">New Arrivals</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <a href="products.html" class="nav-link dropbtn">Products <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="products.html?cat=perfume">Perfumes</a>
+          <a href="products.html?cat=jewelry">Jewelry</a>
+          <a href="products.html?cat=accessories">Accessories</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="category.html?c=men">Men</a>
+          <a href="category.html?c=women">Women</a>
+          <a href="category.html?c=gift">Gift Items</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropbtn">Review <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="reviews.html">Customer Reviews</a>
+          <a href="testimonials.html">Testimonials</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="nav-actions">
+      <ul class="icons" aria-label="Quick actions">
+        <li class="nav_list icon-item">
+          <a href="cart.html" class="nav_icons" aria-label="Cart">
+            <i class="fa fa-shopping-cart" id="cart_icon"></i>
+          </a>
+        </li>
+        <li class="nav_list icon-item">
+          <a href="profile.html" class="nav_icons" aria-label="Profile">
+            <i class="fa fa-user" id="login_icon"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="simple-profile">
+    <div class="profile-card">
+      <h2 id="userName">User Name</h2>
+      <p id="userEmail">user@example.com</p>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut }
+      from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA4p2HR9A9Ofn4av_WAj8A6FvAbGg5Ppi8",
+      authDomain: "orlina-9eb08.firebaseapp.com",
+      projectId: "orlina-9eb08",
+      storageBucket: "orlina-9eb08.firebasestorage.app",
+      messagingSenderId: "576624295485",
+      appId: "1:576624295485:web:f4784acef7f190100a7454"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const userName = document.getElementById("userName");
+    const userEmail = document.getElementById("userEmail");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userEmail.textContent = user.email;
+        userName.textContent = user.displayName || "Orlina User";
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      alert("You have been logged out.");
+      window.location.href = "index.html";
+    });
+  </script>
+
+  <script src="./javascript/index.js"></script>
+</body>
+</html>
